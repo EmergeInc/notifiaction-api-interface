@@ -11,7 +11,7 @@ module NotificationsApiInterface
     request = Net::HTTP::Post.new(url)
     request["Accept"] = 'application/json'
     request["Content-Type"] = 'application/json'
-    request["Authorization"] = 'Bearer $2y$10$GsAKQ/1Cp3kNyAEzsjadW./TBbnr90/9vqAAAu.tDhDdadYVyLueO'
+    request["Authorization"] = set_authorization
     request["Cache-Control"] = 'no-cache'
     request.body = "{\n\t\"user_id\": \"#{user_id}\",\n\t\"module_id\": \"#{module_id}\",
                     \n\t\"title\": \"#{title}\",\n\t\"message\": \"#{message}\",\n\t\"urgent\": #{urgent},
@@ -27,9 +27,20 @@ module NotificationsApiInterface
     url = URI("http://notificationsapi.emergeinc.com/api/message")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Get.new(url)
-    request["Authorization"] = 'Bearer $2y$10$GsAKQ/1Cp3kNyAEzsjadW./TBbnr90/9vqAAAu.tDhDdadYVyLueO'
+    request["Authorization"] = set_authorization
     request["Cache-Control"] = 'no-cache'
     response = http.request(request)
     ret = JSON.parse response.read_body
   end
+
+  private
+
+  def self.set_authorization
+    if ENV["I_AM_ON_HEROKU"]
+        'Bearer $2y$10$fjZxNwZnPYtTlKVV7Bd9j.mPksHykYwwQRyBVjUFgbw/Ob.79KdwG'
+    else
+        'Bearer $2y$10$GsAKQ/1Cp3kNyAEzsjadW./TBbnr90/9vqAAAu.tDhDdadYVyLueO'
+    end
+  end
+
 end
