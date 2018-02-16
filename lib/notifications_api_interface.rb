@@ -36,11 +36,7 @@ module NotificationsApiInterface
   private
 
   def self.set_authorization
-    if ENV["I_AM_ON_HEROKU"]
-        'Bearer $2y$10$fjZxNwZnPYtTlKVV7Bd9j.mPksHykYwwQRyBVjUFgbw/Ob.79KdwG'
-    else
-        'Bearer $2y$10$GsAKQ/1Cp3kNyAEzsjadW./TBbnr90/9vqAAAu.tDhDdadYVyLueO'
-    end
+    "Bearer #{ENV['EMERGE_NOTIFICATIONS_TOKEN']}"
   end
 
 end
