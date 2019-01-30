@@ -36,7 +36,7 @@ module NotificationsApiInterface
   def self.retrieve_user_notifications(user_id)
     require 'uri'
     require 'net/http'
-    url = URI("http://notificationsapi.emergeinc.com/api/message/#{user_id}")
+    url = URI("http://notificationsapi.emergeinc.com/api/message/user/#{user_id}")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Get.new(url)
     request["Authorization"] = set_authorization
