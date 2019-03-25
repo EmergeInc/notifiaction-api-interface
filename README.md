@@ -22,6 +22,9 @@ Or install it yourself as:
 Use the method create_notifications(params), give params in the order as described on (https://github.com/EmergeInc/NotificationAPI#rest-api-documentation) documentation.
 
 Use the retrieve_notifications to retrieve_notifications
+
+Use the retrieve_user_notifications([user_id]) to retrieve specific user's notifications
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
